@@ -1,0 +1,2 @@
+Hello node.js!
+This line was appended later via append
