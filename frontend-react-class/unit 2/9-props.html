@@ -1,0 +1,187 @@
+
+***********************************************************************
+Example 1: Basic String Prop
+
+jsx
+function Car(props) {
+  return <h2>I am a {props.brand}!</h2>;
+}
+
+export default function Garage() {
+  return (
+    <div>
+      <h1>Who lives in my garage?</h1>
+      <Car brand="Ford" />
+    </div>
+  );
+}
+
+This example passes a string "Ford" as a prop from
+Garage (parent) to Car (child).
+
+***********************************************************************
+Example 2: Multiple Props
+
+jsx
+function Car(props) {
+  return (
+    <h2>
+      I am a {props.color} {props.brand} {props.model}!
+    </h2>
+  );
+}
+
+export default function Garage() {
+  return (
+    <Car brand="Ford" model="Mustang" color="red" />
+  );
+}
+
+Props can represent multiple attributes like brand, model, and color.
+
+
+***********************************************************************
+
+
+Example 3: Variable as Prop
+
+jsx
+function Car(props) {
+  return <h2>I am a {props.brand}!</h2>;
+}
+
+export default function Garage() {
+  const carName = "Tesla";
+  return <Car brand={carName} />;
+}
+
+Here, a JavaScript variable is passed as a prop using curly braces {}.
+
+
+
+***********************************************************************
+
+Example 4: Object Prop
+
+jsx
+function Car(props) {
+  return (
+    <h2>My car is a {props.carinfo.name} {props.carinfo.model}!</h2>
+  );
+}
+
+export default function Garage() {
+  const carInfo = { name: "Ford", model: "Mustang" };
+  return <Car carinfo={carInfo} />;
+}
+
+Objects are passed as props for structured data.
+
+***********************************************************************
+
+Example 5: Passing Array Props
+
+jsx
+function Car(props) {
+  return <h2>My favorite car years are: {props.years.join(", ")}</h2>;
+}
+
+export default function Garage() {
+  const years = [1964, 1965, 1966];
+  return <Car years={years} />;
+}
+
+Arrays can be passed as props and accessed with methods like join or indexing.
+
+***********************************************************************
+
+Example 6: Nested Components (Prop Passing Between Components)
+
+jsx
+function Car(props) {
+  return <h2>I am a {props.brand}!</h2>;
+}
+
+function Garage() {
+  return (
+    <div>
+      <h1>Inside Garage:</h1>
+      <Car brand="Maruti" />
+    </div>
+  );
+}
+
+export default Garage;
+
+A parent (Garage) passes props directly to a nested child component (Car).
+Key Points
+
+    Props are read-only and immutable within the child.
+
+    Data flows one-way (from parent to child).
+
+    Props can be of any data type — strings, numbers, arrays, objects,
+    functions, or JSX elements.
+
+
+
+***********************************************************************
+prop drilling example
+
+jsx
+function ChildComponent(props) {
+  return <h2>Child Component: {props.data}</h2>;
+}
+function ParentComponent(props) {
+  return <ChildComponent data={props.data} />;
+}
+export default function GrandParentComponent() {
+  const info = "Hello from GrandParent!";
+  return <ParentComponent data={info} />;
+}
+In this example, data is passed from GrandParentComponent to 
+ParentComponent and then to ChildComponent via props.
+
+***********************************************************************
+Example 7: Function as Prop
+jsx
+function Car(props) {
+  return (
+    <div>
+      <h2>I am a {props.brand}!</h2>
+      <button onClick={props.onStart}>Start Car</button>
+    </div>
+  );
+}
+export default function Garage() {
+  function handleStart() {
+    alert("Car Started!");
+  }
+  return <Car brand="BMW" onStart={handleStart} />;
+} 
+Here, a function is passed as a prop to handle events in the child component.
+***********************************************************************
+Example 8: Default Props
+jsx
+function Car(props) {
+  return <h2>I am a {props.brand}!</h2>;
+}
+Car.defaultProps = {
+  brand: "Toyota",
+};
+export default function Garage() {
+  return <Car />;
+}
+If no prop is provided, the default prop value is used.
+***********************************************************************
+Example 9: Destructuring Props
+jsx
+function Car({ brand, model }) {  
+  return <h2>I am a {brand} {model}!</h2>;
+}
+export default function Garage() {
+  return <Car brand="Honda" model="Civic" />;
+}
+Props can be destructured directly in the function parameters for cleaner code.
+***********************************************************************
+

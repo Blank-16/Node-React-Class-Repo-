@@ -1,0 +1,77 @@
+What is the Rest Operator?
+
+    Written as ...
+
+    Collects all remaining arguments or elements into a single array.
+
+    Often used in functions (to gather arguments) or destructuring
+     (to gather remaining properties).
+
+1. Rest in Functions (Gather Arguments)
+
+function sum(...numbers) {
+    return numbers.reduce((total, num) => total + num, 0);
+}
+
+console.log(sum(1, 2, 3));      // 6
+console.log(sum(4, 5, 6, 7));   // 22
+
+Explanation:
+
+    ...numbers collects all arguments into an array.
+
+    You can then loop or reduce over it.
+
+2. Rest with Array Destructuring
+
+const colors = ["red", "green", "blue", "yellow"];
+
+const [first, second, ...others] = colors;
+
+console.log(first);  // red
+console.log(second); // green
+console.log(others); // ["blue", "yellow"]
+
+Explanation:
+
+    ...others collects all remaining elements after the first two into an array.
+
+3. Rest with Object Destructuring
+
+const person = { name: "Raj", age: 25, city: "Delhi", country: "India" };
+
+const { name, ...details } = person;
+
+console.log(name);    // Raj
+console.log(details); // { age: 25, city: "Delhi", country: "India" }
+
+Explanation:
+
+    The rest operator gathers remaining properties into a new object.
+
+4. Mixing Named and Rest Parameters in Functions
+
+function introduce(firstName, lastName, ...hobbies) {
+    console.log(`Name: ${firstName} ${lastName}`);
+    console.log(`Hobbies: ${hobbies.join(", ")}`);
+}
+
+introduce("Raj", "Sharma", "Reading", "Coding", "Traveling");
+
+// Output:
+// Name: Raj Sharma
+// Hobbies: Reading, Coding, Traveling
+
+Explanation:
+
+    Named parameters take the first values.
+
+    Rest operator captures any remaining values.
+
+✅ Key Points to Remember
+
+    Rest = Collects multiple elements into an array or object.
+
+    Used in function parameters and destructuring.
+
+    Different from the spread operator (which unpacks arrays/objects).

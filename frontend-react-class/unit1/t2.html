@@ -1,0 +1,150 @@
+1. let and const
+
+ES6 introduced block-scoped variables.
+
+let x = 10;
+const y = 20;
+
+x = 15; // ✅ allowed
+// y = 25; ❌ Error: const variables can't be reassigned
+
+if (true) {
+  let blockVar = "inside block";
+  console.log(blockVar); // inside block
+}
+// console.log(blockVar); ❌ Error: not accessible outside block
+
+
+=========================================================================
+
+
+2. Template Literals
+
+Backticks ` allow embedding variables and multi-line strings.
+
+let name = "Alice";
+let greeting = `Hello, ${name}!`;
+console.log(greeting); // Hello, Alice!
+
+let multiLine = `This is
+a multi-line
+string.`;
+console.log(multiLine);
+
+
+============================================================================
+3. Arrow Functions
+
+Shorter syntax for functions.
+
+const add = (a, b) => a + b;
+console.log(add(5, 3)); // 8
+
+const greet = name => console.log(`Hello, ${name}`);
+greet("Bob"); // Hello, Bob
+
+⚠ Arrow functions do not have their own this.
+
+=============================================================================
+4. Default Parameters
+
+Provide default values to function parameters.
+
+function multiply(a, b = 2) {
+  return a * b;
+}
+
+console.log(multiply(5)); // 10
+console.log(multiply(5, 3)); // 15
+=============================================================================
+5. Destructuring
+
+Extract values from arrays or objects easily.
+
+// Array destructuring
+let [a, b] = [1, 2];
+console.log(a, b); // 1 2
+
+// Object destructuring
+let { name, age } = { name: "Alice", age: 25 };
+console.log(name, age); // Alice 25
+
+
+=============================================================================
+6. Spread and Rest Operators (...)
+
+    Spread: Expands elements.
+
+    Rest: Collects elements.
+
+// Spread
+let nums = [1, 2, 3];
+let copy = [...nums, 4, 5];
+console.log(copy); // [1, 2, 3, 4, 5]
+
+// Rest
+function sum(...args) {
+  return args.reduce((total, num) => total + num, 0);
+}
+console.log(sum(1, 2, 3, 4)); // 10
+
+=============================================================================
+
+7. Enhanced Object Literals
+
+Shorthand property names and methods.
+
+let name1 = "Alice";
+let age1 = 25;
+
+let person = {
+  name1, // same as name1: name1
+  age1,
+  greet() {
+    console.log(`Hi, I'm ${this.name1}`);
+  }
+};
+person.greet();
+
+=============================================================================
+
+8. Modules (import / export)
+
+ES6 supports native modules.
+
+// math.js
+export const add = (a, b) => a + b;
+
+// main.js
+import { add } from './math.js';
+console.log(add(2, 3)); // 5
+
+=============================================================================
+
+9. Promises
+
+Handle async operations without callback hell.
+
+let promise = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("Done!"), 1000);
+});
+
+promise.then(result => console.log(result)); // Done!
+
+=============================================================================
+
+10. Classes
+
+ES6 way to create objects and handle inheritance.
+
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  greet() {
+    console.log(`Hi, I'm ${this.name}`);
+  }
+}
+
+new Person("Alice").greet();
+==============================================================================

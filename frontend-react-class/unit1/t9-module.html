@@ -1,0 +1,99 @@
+What Are JavaScript Modules?
+
+    A module is a file that contains reusable code.
+
+    Each module can export variables, functions, or classes.
+
+    Other files can import them.
+
+    Helps in code organization, reusability, and maintainability.
+
+1. Exporting from a Module
+
+📄 math.js
+
+// Named exports
+export const add = (a, b) => a + b;
+export const multiply = (a, b) => a * b;
+
+// Default export
+export default function subtract(a, b) {
+    return a - b;
+}
+
+Explanation:
+
+    Named exports: Can export multiple things (must use {} when importing).
+
+    Default export: One main export per file (imported without {}).
+
+2. Importing a Module
+
+📄 main.js
+
+// Import named exports
+import { add, multiply } from './math.js';
+
+// Import default export
+import subtract from './math.js';
+
+console.log(add(5, 3));       // 8
+console.log(multiply(5, 3));  // 15
+console.log(subtract(5, 3));  // 2
+
+Explanation:
+
+    { add, multiply } matches the names from math.js.
+
+    Default export (subtract) can be given any name when importing.
+
+3. Renaming Imports and Exports
+
+📄 math.js
+
+export const square = x => x * x;
+
+📄 main.js
+
+import { square as sq } from './math.js';
+
+console.log(sq(4)); // 16
+
+Explanation:
+
+    You can rename imports to avoid naming conflicts.
+
+4. Import Everything
+
+import * as MathOps from './math.js';
+
+console.log(MathOps.add(2, 3));       // 5
+console.log(MathOps.multiply(2, 3));  // 6
+
+Explanation:
+
+    Imports all named exports into a single object.
+
+5. Modules in HTML
+
+📄 index.html
+
+<script type="module" src="main.js"></script>
+
+Explanation:
+
+    type="module" is required in the browser for ES6 modules.
+
+    Module scripts run in strict mode automatically.
+
+✅ Key Points to Remember
+
+    Modules are file-based (one file = one module).
+
+    Named exports allow multiple exports per file.
+
+    Default export is for the main thing a file exports.
+
+    Use type="module" in HTML for browser usage.
+
+    In Node.js, use .mjs extension or enable "type": "module" in package.json.

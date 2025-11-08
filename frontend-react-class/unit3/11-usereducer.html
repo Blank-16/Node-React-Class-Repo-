@@ -1,0 +1,166 @@
+React useReducer — From Basic to Advanced
+The useReducer hook is a powerful alternative to useState, especially 
+for components that manage complex or interrelated state. 
+It works much like reducers in Redux but inside your component!
+
+Basic Theory
+useReducer replaces useState when updates need custom logic, many variables, or actions that depend on previous state.
+
+You define a reducer function: function reducer(state, action) { ... }, describing how state changes in response to dispatched actions.
+
+Call dispatch(action) anywhere to trigger a state change.
+
+1. Basic Counter Example
+jsx
+import React, { useReducer } from 'react';
+
+function counterReducer(state, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    case 'DECREMENT':
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(counterReducer, { count: 0 });
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'INCREMENT' })}>Inc</button>
+      <button onClick={() => dispatch({ type: 'DECREMENT' })}>Dec</button>
+    </div>
+  );
+}
+Explanation:
+
+The reducer decides how state changes.
+
+Call dispatch({ type: ... }) to update.
+
+State transitions are predictable and centralized.
+
+2. State as Arrays: Shopping List Example
+jsx
+import React, { useReducer, useRef } from 'react';
+
+const initialList = [];
+function listReducer(state, action) {
+  switch (action.type) {
+    case 'ADD_ITEM':
+      return [...state, { id: Date.now(), name: action.name }];
+    case 'REMOVE_ITEM':
+      return state.filter(item => item.id !== action.id);
+    default:
+      return state;
+  }
+}
+
+function ShoppingList() {
+  const [items, dispatch] = useReducer(listReducer, initialList);
+  const inputRef = useRef();
+  function handleAdd(e) {
+    e.preventDefault();
+    if (inputRef.current.value.trim()) {
+      dispatch({ type: 'ADD_ITEM', name: inputRef.current.value });
+      inputRef.current.value = '';
+    }
+  }
+  return (
+    <form onSubmit={handleAdd}>
+      <input ref={inputRef} />
+      <button type="submit">Add</button>
+      <ul>
+        {items.map(item => (
+          <li key={item.id}>
+            {item.name}
+            <button onClick={() => dispatch({ type: 'REMOVE_ITEM', id: item.id })}>Remove</button>
+          </li>
+        ))}
+      </ul>
+    </form>
+  );
+}
+Explanation:
+
+The reducer returns a new array for each action, so React detects updates.
+
+Multiple actions can be handled: add/remove.
+
+3. Multiple Related State Variables (Scoreboard Example)
+jsx
+import React, { useReducer } from 'react';
+
+const initialScore = [
+  { id: 1, score: 0, name: "John" },
+  { id: 2, score: 0, name: "Sally" }
+];
+function scoreReducer(state, action) {
+  switch (action.type) {
+    case "INCREASE":
+      return state.map(player =>
+        player.id === action.id
+          ? { ...player, score: player.score + 1 }
+          : player
+      );
+    default:
+      return state;
+  }
+}
+
+function ScoreBoard() {
+  const [score, dispatch] = useReducer(scoreReducer, initialScore);
+  return (
+    <>
+      {score.map(player => (
+        <div key={player.id}>
+          <button onClick={() => dispatch({ type: "INCREASE", id: player.id })}>
+            {player.name}
+          </button>
+          Score: {player.score}
+        </div>
+      ))}
+    </>
+  );
+}
+Explanation:
+
+Perfect for state with multiple 'objects' needing independent updates.
+
+4. Advanced: Initialization with init Function
+jsx
+function init(count) {
+  return { count };
+}
+function reducer(state, action) {
+  switch(action.type) {
+    case 'RESET':
+      return init(action.payload);
+    default:
+      return state;
+  }
+}
+function CounterWithInit() {
+  const [state, dispatch] = useReducer(reducer, 5, init);
+  return (
+    <>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'RESET', payload: 0 })}>Reset</button>
+    </>
+  );
+}
+Explanation:
+
+The third param lets you customize initial state, especially useful for lazy initialization.
+
+Review & When to Use
+Use useReducer if:
+
+Your state logic is complex (multiple sub-values, or based on previous state)
+
+You have many state transitions that share logic or types (like Redux)
+
+You want predictable state updates and easier debugging

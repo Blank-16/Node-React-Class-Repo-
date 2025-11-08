@@ -1,0 +1,134 @@
+JSX in React
+What is JSX?
+
+It is a syntax extension for JavaScript that allows you to write 
+HTML-like code inside JavaScript files.
+
+
+Why use JSX?
+
+JSX makes it easier and cleaner to create React elements and build the UI.
+
+    Without JSX: HTML and JavaScript are written separately.
+    With JSX: You can write both together in the same file.
+
+
+Example with JSX:
+function App() {
+  const userName = "Kuldeep Kushwaha";
+  let x = 20;
+  let y = 30;
+
+  return (
+    <div>
+      <h1>{userName}</h1>
+      <h1>{10 + 20 + 30}</h1>
+      <h1>{x * y}</h1>
+      <button onClick={() => alert("Hello")}>Click</button>
+    </div>
+  );
+}
+
+
+Here:
+
+    {userName} is JavaScript inside JSX.
+    {10 + 20 + 30} and {x * y} are also JS expressions.
+    The onClick event is handled using an arrow function.
+
+
+Without JSX (Old React method):
+
+
+import { createElement } from "react";
+
+function App() {
+  return createElement(
+    "div",
+    { id: "rootDiv" },
+    createElement("h1", { className: "heading" }, "Hello without JSX")
+  );
+}
+
+This is harder to read and write, which is why JSX is preferred.
+
+
+
+<!--   
+const element1 = React.createElement('h1', { className: 'greeting' },
+  'Hello, world!');
+return element1;
+
+  const element3 = React.createElement(
+     'div',
+     null,
+     React.createElement('span', null, 'Nested span'),
+     React.createElement('button', { onClick: () => alert('Clicked!') }, 'Click Me')
+ );
+ return element3; -->
+
+JSX Full Form
+
+    There’s often some confusion about what JSX stands for.
+    Some say it means JavaScript Extension, while others believe
+    it's JavaScript XML. 
+    
+    However, there is no official full form
+    of JSX mentioned on the React official website — it’s just a
+    syntax extension used to write HTML-like code in JavaScript.
+
+
+///////////////////////////////////////////////////////////////
+//////////////////////
+JSX Exercise | Solution
+Create a New File
+
+Create a new file in the src folder of your React project and name it:
+ToDo.jsx
+
+
+Write the ToDo Component
+
+Here’s the complete code:
+function ToDo() {
+  function callFun() {
+    alert("Function called");
+  }
+
+  return (
+    <div>
+      <h1>kuldeep  Todos</h1>
+
+      <img
+        src="https://st5.depositphotos.com/1703608/69112/i/450/depositphotos_691120514-stock-photo-adorable-labrador-puppy-closeup-isolated.jpg"
+        alt="dog"
+        className="photo"
+      />
+
+      <ul>
+        <li>Invent new traffic light</li>
+        <li>Rehearse a movie scene</li>
+        <li>Improve the spectrum technology</li>
+      </ul>
+
+      <button onClick={callFun}>Click Me</button>
+    </div>
+  );
+}
+
+export default ToDo;
+
+Note:
+
+    We’ve added an onClick event to the button that calls the
+    callFun() function when clicked.
+
+
+Import and Use the Component in App.jsx
+import ToDo from "./ToDo";
+
+function App() {
+  return <ToDo />;
+}
+
+export default App;

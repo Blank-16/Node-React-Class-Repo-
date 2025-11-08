@@ -1,0 +1,46 @@
+React useMemo Examples: Basic to Advanced
+useMemo is a React hook that lets you cache the result of expensive calculations between renders, recalculating only when dependencies change. This is called memoization.
+
+1. Basic Example: Avoiding Unnecessary Calculations
+Suppose you have a component that calculates the square of a number:
+
+jsx
+import React, { useState, useMemo } from "react";
+
+function SquareCalculator() {
+  const [num, setNum] = useState(0);
+  const squared = useMemo(() => num * num, [num]);
+  return (
+    <div>
+      <input value={num} onChange={e => setNum(Number(e.target.value))} />
+      <p>Square: {squared}</p>
+    </div>
+  );
+}
+Here, the squared calculation only reruns if num changes.
+
+2. Intermediate Example: Memoizing Filtered List
+Say you want to display a filtered todos list that only recalculates if the todos or tab change:
+
+jsx
+const visibleTodos = useMemo(() => filterTodos(todos, tab), [todos, tab]);
+This is efficient for large arrays or complex filters.​
+
+3. Advanced Example: Memoizing Expensive Utility in a Blog App
+If you have a resource-intensive sorting function for blog posts:
+
+jsx
+// In Blog component
+const sortedPosts = useMemo(() => sortPosts(posts), [posts]);
+The sorting function runs only when posts changes—not every render—saving performance on large datasets.​
+
+4. Expert Example: Pagination Component
+jsx
+const paginatedData = useMemo(() => {
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  return data.slice(startIndex, endIndex);
+}, [currentPage, data, itemsPerPage]);
+This paginates a dataset, recalculating only when page, data, or items per page change.
+Summary: When to Use useMemo?
+Use it for expensive calculations that don't need to run every <render class=""></render>

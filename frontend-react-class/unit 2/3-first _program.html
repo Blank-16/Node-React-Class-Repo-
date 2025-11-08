@@ -1,0 +1,104 @@
+Write First Code in React App
+
+==================================================================
+
+📄 First File That Executes: index.html
+
+Inside index.html, you have:
+
+<div id="root"></div>
+<script type="module" src="/src/main.jsx"></script>
+
+    The <script> tag loads main.jsx.
+    The root element is the starting point of the React app.
+
+======================================================================
+📄 In main.jsx File
+jsx
+CopyEdit
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App';
+
+createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+    createRoot() finds the element with id root in index.html.
+    It renders the <App /> component inside that root.
+    
+    This is the main job of the main.jsx file.
+
+======================================================================
+📄 Replace All Code in App.jsx With:
+jsx
+CopyEdit
+function App() {
+  return (
+    <>
+      <h1>Hello World</h1>
+    </>
+  );
+}
+
+export default App;
+
+
+===================================================================
+How React Works:
+
+    You can write HTML code inside JavaScript using JSX.
+    React renders everything properly in the browser.
+
+
+Why Should Component Names Start With a Capital Letter?
+
+    Because React treats lowercase tags like HTML elements 
+    (e.g., <div>, <h1>), and uppercase tags as custom React components.
+
+
+Return Must Have a Single Parent Tag
+
+    All JSX returned by a component must be wrapped inside a single 
+    parent element like a <div> or a fragment <> </>.
+
+=================================================================================
+📄 Create a New File in src: Header.jsx
+jsx
+CopyEdit
+function Header() {
+  return (
+    <div>
+      <h4>Header file</h4>
+    </div>
+  );
+}
+
+export default Header;
+
+
+=================================================================================
+📄 Import and Use Header in App.jsx
+jsx
+CopyEdit
+import { useState } from 'react';
+import Header from './Header';
+
+function App() {
+ return (
+    <div>
+      <Header />
+      <h1>Hello World</h1>
+    </div>
+  );
+}
+
+export default App;
+
+Library vs Framework
+
+    Library: You control the flow (e.g., React).
+    Framework: The framework controls the flow; 
+    you just follow its structure (e.g., Angular).

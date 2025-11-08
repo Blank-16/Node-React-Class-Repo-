@@ -1,0 +1,85 @@
+Ternary Operator
+
+The ternary operator is a simplified conditional operator like if / else.
+
+Syntax: condition ? <expression if true> : <expression if false>
+
+Here is an example using if / else:
+
+
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<h1 id="demo"></h1>
+
+<script>
+function renderApp() {
+  document.getElementById("demo").innerHTML = "Welcome!";
+}
+
+function renderLogin() {
+  document.getElementById("demo").innerHTML = "Please log in";
+}
+
+let authenticated = true;
+
+if (authenticated) {
+  renderApp();
+} else {
+  renderLogin();
+}
+
+</script>
+
+<p>Try changing the "authenticated" variable to false, and run the code to 
+  see what happens.</p>
+</body>
+</html>
+
+Here is the same example using a ternary operator:
+Example
+
+With Ternary
+
+authenticated ? renderApp() : renderLogin();
+
+
+
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<h1 id="demo"></h1>
+
+<script>
+function renderApp() {
+  document.getElementById("demo").innerHTML = "Welcome!";
+}
+
+function renderLogin() {
+  document.getElementById("demo").innerHTML = "Please log in";
+}
+
+let authenticated = true;
+
+authenticated ? renderApp() : renderLogin();
+
+</script>
+
+<p>Try changing the "authenticated" variable to false, and run the code 
+  to see what happens.</p>
+</body>
+</html>
+
+
+Exercise?
+
+Which of the following is a correct use of the ternary operator?
+
+x = y : z;
+x = y ? z;
+x ? y : z;
+

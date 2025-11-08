@@ -1,0 +1,102 @@
+Custom React Hooks: Examples from Basic to Advanced
+Custom hooks in React allow you to extract reusable logic, making your components clean and modular. Let's walk through several examples from simple to complex.
+
+1. Basic Example: Toggle State
+A custom hook to toggle a boolean value (e.g., show/hide modal).
+
+jsx
+import { useState, useCallback } from 'react';
+
+function useToggle(initialValue = false) {
+  const [state, setState] = useState(initialValue);
+  const toggle = useCallback(() => setState(s => !s), []);
+  return [state, toggle];
+}
+
+// Usage
+// const [isOpen, toggleOpen] = useToggle();
+Practice: Can you update this hook to accept a function that sets a specific value? Why might that be useful?
+
+2. Intermediate Example: Fetch Data from API
+Encapsulate fetch logic for reuse (often called useFetch).
+
+jsx
+import { useEffect, useState } from 'react';
+
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setLoading(true);
+    fetch(url)
+      .then(res => res.json())
+      .then(data => setData(data))
+      .finally(() => setLoading(false));
+  }, [url]);
+  return { data, loading };
+}
+
+// Usage:
+// const { data, loading } = useFetch('https://api.example.com/posts');
+Check yourself: What problems might arise if the URL changes while a fetch is in progress?
+
+3. Advanced Example: Local Storage State Sync
+Sync React state with browser localStorage—persists values across sessions.
+
+jsx
+import { useState } from 'react';
+
+function useLocalStorage(key, initialValue) {
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch {
+      return initialValue;
+    }
+  });
+
+  const setValue = (value) => {
+    setStoredValue(value);
+    window.localStorage.setItem(key, JSON.stringify(value));
+  };
+
+  return [storedValue, setValue];
+}
+
+// Usage:
+// const [name, setName] = useLocalStorage('name', 'John');
+Test it out: Try switching tabs and see if your value persists—why is this helpful?
+
+4. Expert Example: Custom Event Listener
+Centralize the logic for adding and removing event listeners (like mouse movement).
+
+jsx
+import { useEffect, useRef } from "react";
+
+function useEventListener(eventName, handler, element = window) {
+  const savedHandler = useRef();
+
+  useEffect(() => {
+    savedHandler.current = handler;
+  }, [handler]);
+
+  useEffect(() => {
+    if (!element.addEventListener) return;
+    const eventListener = (event) => savedHandler.current(event);
+    element.addEventListener(eventName, eventListener);
+    return () => {
+      element.removeEventListener(eventName, eventListener);
+    };
+  }, [eventName, element]);
+}
+
+// Usage:
+// useEventListener('mousemove', e => setCoords({x: e.clientX, y: e.clientY}));
+Quick Recap
+
+Custom hooks must begin with use and can use built-in hooks inside
+
+They help manage side effects, shared state, or cross-cutting concerns
+
+Always return what your components actually need (state, handlers, etc.)

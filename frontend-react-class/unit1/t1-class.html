@@ -1,0 +1,165 @@
+1. Basic ES6 Class
+
+class Person {
+  constructor(name, age) 
+  {
+    this.name = name; // instance property
+    this.age = age;
+  }
+
+  greet() { // method
+    console.log(`Hi, my name is ${this.name} and I'm ${this.age} years old.`);
+  }
+}
+
+const p1 = new Person("Alice", 25);
+p1.greet(); // Output: Hi, my name is Alice and I'm 25 years old.
+
+Explanation
+
+    class keyword: Defines the blueprint for creating objects.
+
+    constructor(): Special method that runs automatically when you create an object.
+
+    this keyword: Refers to the object being created.
+
+    Methods: Functions inside a class — no function keyword needed.
+===========================================================================
+2. Class Inheritance (extends)
+
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+
+  speak() {
+    console.log(`${this.name} makes a sound.`);
+  }
+}
+
+class Dog extends Animal {
+  speak() {
+    console.log(`${this.name} barks.`);
+  }
+}
+
+const dog1 = new Dog("Rex");
+dog1.speak(); // Output: Rex barks.
+
+Explanation
+
+    extends: Lets a class inherit properties and methods from another class.
+
+    Method overriding: Child class replaces the parent’s method with its own.
+
+===========================================================================
+3. Using super() in Inheritance
+
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+class Dog extends Animal {
+  constructor(name, breed) {
+    super(name); // calls parent constructor
+    this.breed = breed;
+  }
+
+  showDetails() {
+    console.log(`${this.name} is a ${this.breed}`);
+  }
+}
+
+const dog2 = new Dog("Buddy", "Golden Retriever");
+dog2.showDetails(); // Output: Buddy is a Golden Retriever
+
+Explanation
+
+    super(): Calls the parent class constructor —
+     must be called before using this in a child class.
+
+===========================================================================
+4. Static Methods
+
+class MathUtils {
+  static add(a, b) {
+    return a + b;
+  }
+}
+
+console.log(MathUtils.add(5, 3)); // Output: 8
+
+Explanation
+
+    static: Method belongs to the class itself, not to instances.
+
+    Called with ClassName.method().
+
+===========================================================================
+    5. Getters and Setters
+
+class User {
+  constructor(name) {
+    this._name = name; // convention: underscore for private-like fields
+  }
+
+  get name1() {
+    return this._name.toUpperCase();
+    //This is a getter method. Whenever you access user1.name (without parentheses),
+    // the getter runs and returns the name in uppercase.
+  }
+
+  set name(newName) {
+    if (newName.length < 3) {
+      console.log("Name too short!");
+    } else {
+      this._name = newName;
+    }
+  }
+}
+
+const user1 = new User("Sam");
+console.log(user1.name1); // Output: SAM
+user1.name = "Jo"; // Output: Name too short!
+
+Explanation
+
+    Getter: Allows accessing properties like a variable but actually runs a function.
+
+    Setter: Allows assigning to a property but runs validation or logic before 
+    storing.
+
+    Here, this._name holds the actual name string. JavaScript doesn't have true
+     private 
+    fields (unless you use #field syntax), but many developers use an underscore 
+    as a
+    signal that it shouldn't be accessed directly from outside.
+
+===========================================================================
+6. Private Fields (#) (ES2022+ feature but works with ES6 syntax)
+
+class BankAccount {
+  #balance = 0; // private field
+
+  deposit(amount) {
+    this.#balance += amount;
+  }
+
+  getBalance() {
+    return this.#balance;
+  }
+}
+
+const acc = new BankAccount();
+acc.deposit(500);
+console.log(acc.getBalance()); // Output: 500
+// console.log(acc.#balance); // ❌ Error: Private field
+
+Key Benefits of ES6 Classes
+
+✅ Cleaner, more readable syntax than prototypes
+✅ Built-in support for inheritance (extends, super)
+✅ Supports getters, setters, static methods, and private fields
+✅ Still uses JavaScript's prototype-based inheritance under the hood

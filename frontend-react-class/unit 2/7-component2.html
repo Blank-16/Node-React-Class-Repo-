@@ -1,0 +1,171 @@
+
+Importing and Exporting Components in React
+
+In React, components can be organized into separate files for better modularity
+and reusability. To use a component defined in one file within another file, 
+you need to export it from the defining file and import it into the using file.
+
+
+****************************************************************************
+Why export/import components?
+
+    We should not create all components in a single file.
+    If we want to use a component in other files, we must export it.
+    To use an exported component, we need to import it in the file where
+    we want to use it.
+
+
+Example Use Case
+
+If you create an Image component, you can reuse it in multiple places like:
+
+    Profile picture
+    Post section
+    Navbar
+    Dropdown
+
+
+This keeps your code modular and reusable.
+
+
+Create a Component File: UserComponent.jsx
+Step 1: Create the Component
+jsx
+CopyEdit
+function Login() {
+  return (
+    <div>
+      <h1>Login User</h1>
+    </div>
+  );
+}
+
+Step 2: Export the Component
+jsx
+CopyEdit
+export default Login;
+
+Step 3: Import and Use in App.jsx
+jsx
+CopyEdit
+import Login from "./UserComponent.jsx";
+
+function App() {
+  return (
+    <div>
+      <h1>Importing and Exporting Components</h1>
+      <Login />
+    </div>
+  );
+}
+
+Default Export
+
+    You can export only one default per file.
+    Import it without curly braces.
+
+jsx
+CopyEdit
+// Export
+export default Login;
+
+// Import
+import Login from "./UserComponent.jsx";
+
+Named Export
+
+You can export multiple values from a single file using named exports.
+jsx
+CopyEdit
+// Export
+export function Profile() {
+  return <h1>Profile</h1>;
+}
+
+export function Setting() {
+  return <h1>Setting</h1>;
+}
+jsx
+CopyEdit
+// Import
+import { Profile, Setting } from "./UserComponent.jsx";
+
+Both Default and Named Exports in One File
+jsx
+CopyEdit
+function Login() {
+  return <h1>Login User</h1>;
+}
+
+export function Profile() {
+  return <h1>Profile</h1>;
+}
+
+export function Setting() {
+  return <h1>Setting</h1>;
+}
+
+export default Login;
+jsx
+CopyEdit
+// Import in App.jsx
+import Login, { Profile, Setting } from "./UserComponent.jsx";
+
+function App() {
+  return (
+    <div>
+      <h1>Importing and Exporting Components</h1>
+      <Login />
+      <Profile />
+      <Setting />
+    </div>
+  );
+}
+
+Exporting and Importing Variables
+
+You can also export variables (like keys, constants):
+jsx
+CopyEdit
+// UserComponent.jsx
+export const UserKey = "@#$#@$#@#$@#";
+jsx
+CopyEdit
+// App.jsx
+import Login, { Profile, Setting, UserKey } from "./UserComponent.jsx";
+
+function App() {
+  return (
+    <div>
+      <h1>Importing and Exporting Components</h1>
+      <Login />
+      <Profile />
+      <Setting />
+      <h2>{UserKey}</h2>
+    </div>
+  );
+}
+
+
+Summary
+
+
+Default Export
+
+Syntax : export default ComponentName
+
+Import Syntax: import ComponentName from "file"
+
+
+Named Export
+
+Syntax : export { ComponentName } or export const
+
+Import Syntax : import { ComponentName } from "file"
+
+
+Combined Export
+
+Syntax : Default + Named
+
+Import Syntax :import Default, { Named1, Named2 }

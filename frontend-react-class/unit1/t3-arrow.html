@@ -1,0 +1,109 @@
+What Are Arrow Functions?
+
+Arrow functions are a shorter syntax for writing functions in JavaScript.
+They are especially useful for callbacks, array methods, and concise
+one-line functions.
+
+Syntax:
+
+const functionName = (parameters) => {
+    // function body
+};
+
+1. Basic Arrow Function
+
+// Normal function
+function greet(name) {
+    return "Hello, " + name;
+}
+
+// Arrow function
+const greetArrow = (name) => {
+    return "Hello, " + name;
+};
+
+console.log(greetArrow("Raj")); // Output: Hello, Raj
+
+Explanation:
+
+    Replaces the function keyword with =>.
+
+    Works the same way as a normal function here.
+
+2. Implicit Return (One-Liner)
+
+const add = (a, b) => a + b;
+
+console.log(add(5, 3)); // Output: 8
+
+Explanation:
+
+    If the function has only one expression, you can skip {} and return.
+
+    The expression’s result is returned automatically.
+
+3. No Parameters
+
+const sayHello = () => "Hello World";
+
+console.log(sayHello()); // Output: Hello World
+
+Explanation:
+
+    If no parameters, use () before =>.
+
+4. Single Parameter Without Parentheses
+
+const square = n => n * n;
+
+console.log(square(4)); // Output: 16
+
+Explanation:
+
+    For one parameter, parentheses are optional.
+
+5. Arrow Functions and Array Methods
+
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(num => num * 2);
+
+console.log(doubled); // Output: [2, 4, 6, 8, 10]
+
+Explanation:
+
+    Arrow functions are perfect for short callbacks in
+    .map(), .filter(), .reduce(), etc.
+============================================================
+
+6. Arrow Functions and this
+
+const person = {
+    name: "Raj",
+    normalFunc: function() {
+        console.log("Normal:", this.name);
+    },
+    arrowFunc: () => {
+        console.log("Arrow:", this.name);
+    }
+};
+
+person.normalFunc(); // Normal: Raj
+person.arrowFunc();  // Arrow: undefined
+
+Explanation:
+
+    Important: Arrow functions do not have their own this — they inherit it
+    from the surrounding scope.
+
+    In the above example, arrowFunc uses this from the global scope, 
+    not the person object.
+
+✅ Key Points to Remember
+
+    Shorter and cleaner syntax.
+
+    No own this binding (good for some cases, bad for object methods).
+
+    Great for callbacks and functional programming.
+
+    Not suitable as constructor functions.

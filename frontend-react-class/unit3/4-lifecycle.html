@@ -1,0 +1,144 @@
+React Component Lifecycle: Theory & Examples
+React components go through a series of lifecycle phases:
+ Mounting, Updating, and Unmounting.
+
+  Each phase has special methods/hooks you can use to run 
+  code at specific times. Let's break down each phase, 
+  then examine example code for both class and functional components.​
+
+1. Mounting
+When a component is first added to the DOM. 
+Use this phase to set up state, fetch data, and start timers.
+
+Class component methods:
+
+constructor: initialize state, bind methods
+
+getDerivedStateFromProps: sync state with props
+
+render: creates the DOM structure
+
+componentDidMount: run setup actions (API calls, subscriptions)
+
+Example (class):
+
+jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { data: null };
+  }
+  componentDidMount() {
+    // Fetch data when component mounts
+    fetch('/api/mydata')
+      .then(res => res.json())
+      .then(data => this.setState({ data }));
+  }
+  render() {
+    return <div>{this.state.data}</div>;
+  }
+}
+2. Updating
+Occurs when props or state change, causing a re-render.
+Use this phase to respond to changes and optimize performance.
+
+Class component methods:
+
+shouldComponentUpdate: decide if re-render is needed
+
+getDerivedStateFromProps: sync state after updates
+
+render: display updated DOM
+
+getSnapshotBeforeUpdate: grab values before DOM update
+
+componentDidUpdate: run actions after an update (e.g., network requests)
+
+Example (class):
+
+jsx
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.count !== this.state.count) {
+      console.log('Count changed:', this.state.count);
+    }
+  }
+  render() {
+    return <button onClick={() => this.setState({ count: this.state.count + 1 })}>Add</button>;
+  }
+}
+3. Unmounting
+Occurs when a component is removed from the DOM.
+Clean up things like timers, subscriptions, or event 
+listeners here to avoid memory leaks.
+
+Class component method:
+
+componentWillUnmount: run cleanup code
+
+Example (class):
+
+jsx
+class Timer extends React.Component {
+  componentDidMount() {
+    this.interval = setInterval(() => {/* tick */}, 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+  render() {
+    return <span>Timer</span>;
+  }
+}
+
+
+4. Lifecycle with Functional Components (Hooks)
+In modern React, use the useEffect hook instead of lifecycle methods:
+
+Mount: useEffect(() => { ... }, [])
+
+Update: useEffect(() => { ... }, [stateOrProp])
+
+Unmount: inside useEffect, return a cleanup function
+
+Example (functional):
+
+jsx
+import React, { useEffect, useState } from 'react';
+function Example() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    console.log('Component mounted');
+    return () => {
+      console.log('Component will unmount');
+    };
+  }, []);
+  useEffect(() => {
+    if (count > 0) {
+      console.log('Count updated:', count);
+    }
+  }, [count]);
+  return <button onClick={() => setCount(count + 1)}>{count}</button>;
+}
+
+
+Quick Summary
+Mounting: Setup, fetch data, subscribe 
+(e.g., componentDidMount or useEffect with []).
+
+Updating: Respond to changes (e.g., componentDidUpdate,
+ useEffect with dependencies).
+
+Unmounting: Cleanup resources (e.g., componentWillUnmount,
+ cleanup function in useEffect).
+
+Mnemonic: "M-U-U"
+Mounting
+
+Updating
+
+(final) Unmounting

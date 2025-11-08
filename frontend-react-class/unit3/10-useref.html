@@ -1,0 +1,123 @@
+React useContext: From Basic to Advanced
+The useContext hook lets a functional component read and subscribe 
+to a React Context, making it simple to share global state or data 
+deeply across the component tree—no prop drilling needed.​
+
+Let's step from basic to more advanced examples:
+
+1. Context Basics: Creating & Consuming Context
+jsx
+import React, { createContext, useContext, useState } from 'react';
+
+const MyContext = createContext('default'); // Default value
+
+function App() {
+  const [value, setValue] = useState('Hello World');
+  return (
+    <MyContext.Provider value={value}>
+      <Display />
+    </MyContext.Provider>
+  );
+}
+
+function Display() {
+  const contextValue = useContext(MyContext);
+  return <h1>{contextValue}</h1>;
+}
+Explanation:
+
+createContext('default') makes a context object with a default value.
+
+<MyContext.Provider value={value}> supplies value to all children.
+
+useContext(MyContext) inside Display reads the current value and updates automatically if it changes.
+
+2. Passing Data Through Many Nestings
+Context's real power is avoiding prop drilling—passing data through multiple layers.
+
+jsx
+const UserContext = createContext();
+function Parent() {
+  const [user] = useState('Alice');
+  return (
+    <UserContext.Provider value={user}>
+      <Intermediate />
+    </UserContext.Provider>
+  );
+}
+function Intermediate() {
+  return <DeepChild />;
+}
+function DeepChild() {
+  const user = useContext(UserContext);
+  return <span>Hello, {user}</span>;
+}
+Explanation:
+
+No need to pass user prop through Intermediate—DeepChild grabs it directly from context.
+
+3. Dynamic State in Context (Advanced)
+Share not just values, but state and state-updating functions for global actions (like authentication, themes, language, etc.).
+
+jsx
+const AuthContext = createContext();
+function AuthProvider({ children }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  return (
+    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+function LoginToggle() {
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  return (
+    <button onClick={() => setIsLoggedIn(!isLoggedIn)}>
+      {isLoggedIn ? 'Logout' : 'Login'}
+    </button>
+  );
+}
+function App() {
+  return (
+    <AuthProvider>
+      <LoginToggle />
+      {/* other components can also use AuthContext here */}
+    </AuthProvider>
+  );
+}
+Explanation:
+
+Context provides both a value (isLoggedIn) and a function to update it (setIsLoggedIn), so any child can read or update global state.​
+
+Works for theming, settings, notifications—anything you want accessible everywhere.
+
+4. Multiple Contexts: Consuming More Than One
+jsx
+const ThemeContext = createContext('light');
+const LanguageContext = createContext('en');
+function Toolbar() {
+  const theme = useContext(ThemeContext);
+  const language = useContext(LanguageContext);
+  return <div className={`theme-${theme}`}>Language: {language}</div>;
+}
+function App() {
+  return (
+    <ThemeContext.Provider value="dark">
+      <LanguageContext.Provider value="fr">
+        <Toolbar />
+      </LanguageContext.Provider>
+    </ThemeContext.Provider>
+  );
+}
+Explanation:
+
+You can read from as many contexts as needed in a single component.
+
+Summary & Quick Review
+useContext reads the current value of a React Context (created with createContext).
+
+Wrap your components in the relevant context <Provider> higher up the tree.
+
+Any changes to the context value cause all useContext subscribers to re-render.
+
+Great for shared state (auth, theme, settings).

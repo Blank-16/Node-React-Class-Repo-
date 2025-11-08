@@ -1,0 +1,73 @@
+1. Installing React using Create React App (CRA)
+
+    Note: CRA is older and slower for large projects, but still works fine for 
+    beginners.
+
+Steps
+
+    Make sure Node.js is installed
+
+node -v
+npm -v
+
+If not installed, download from nodejs.org.
+
+Create the React App
+
+npx create-react-app my-app
+
+    npx runs the package without installing globally.
+
+    my-app is your project folder name.
+
+Go inside the project
+
+cd my-app
+
+Start the development server
+
+    npm start
+
+    This opens the app in your browser at http://localhost:3000.
+
+
+
+
+=================================================================================
+2. Installing React using Vite (Faster, modern, preferred for new projects)
+Steps
+
+    Create the project
+
+npm create vite@latest my-app
+
+You’ll get prompts:
+
+    Project name → press Enter to use my-app
+
+    Framework → choose React
+
+    Variant → choose JavaScript or TypeScript
+
+Go inside the project
+
+cd my-app
+
+Install dependencies
+
+npm install
+
+Start the development server
+
+npm run dev
+
+This will show a local server link like:
+
+    Local:   http://localhost:5173/
+
+Key Differences
+Feature	       Create React App (CRA)	     Vite
+Speed	       Slower startup	             Super fast
+Build Tool	   Webpack	                     ESBuild + Rollup
+Config	       Hidden by default	         Easier to customize
+Popularity	   Older, still used	         Becoming the default choice

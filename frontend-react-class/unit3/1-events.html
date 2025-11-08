@@ -1,0 +1,152 @@
+Here are examples of various common React events with
+ simple code snippets demonstrating how to handle them:
+
+ 1. Click Event (onClick)
+
+jsx
+function ClickExample() {
+  const handleClick = () => alert('Button clicked!');
+  return <button onClick={handleClick}>Click Me</button>;
+}
+
+Triggers when the user clicks the button.
+
+
+
+
+2. Change Event (onChange) — For input fields
+
+jsx
+function ChangeExample() {
+  const [text, setText] = useState('');
+  return (
+    <>
+    <input
+      type="text"
+      value={text}
+      onChange={(e) => setText(e.target.value)}
+      placeholder="Type here"
+    />
+    <h1>You typed: {text}  </h1>
+    </>)
+    }
+
+Fires whenever the input value changes.
+
+
+3. Form Submit Event (onSubmit)
+
+jsx
+function SubmitExample() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert('Form submitted');
+  };
+  return (
+    <form onSubmit={handleSubmit}>
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
+Triggered when the form is submitted; preventDefault() stops page reload.
+
+
+
+4. Keyboard Events (onKeyDown, onKeyUp)
+
+jsx
+function KeyExample() {
+  const handleKeyDown = (e) => console.log('Key down:', e.key);
+  return <input onKeyDown={handleKeyDown} placeholder="Press a key" />;
+}
+
+Detects keyboard key pressed down.
+
+
+
+5. Mouse Enter and Leave (onMouseEnter, onMouseLeave)
+
+jsx
+function HoverExample() {
+  const [hover, setHover] = React.useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      style={{ padding: '10px', backgroundColor: hover ? 'lightblue' : 'white' }}
+    >
+      Hover over me!
+    </div>
+  );
+}
+
+Tracks when mouse pointer enters or leaves an element.
+
+
+
+6. Focus and Blur (onFocus, onBlur)
+
+jsx
+function FocusExample() {
+  const [focused, setFocused] = React.useState(false);
+  return (
+    <input
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+      placeholder={focused ? 'Focused!' : 'Click here'}
+    />
+  );
+}
+
+Detects input gaining or losing focus.
+
+
+
+7. Clipboard Events (onCopy, onPaste)
+
+jsx
+function ClipboardExample() {
+  const handleCopy = () => alert('Text copied!');
+  return <input onCopy={handleCopy} placeholder="Try copying this text" />;
+}
+
+Triggered on copying text.
+
+
+
+8. Drag and Drop Events (onDragStart, onDrop)
+
+jsx
+function DragExample() {
+  const handleDrop = (e) => {
+    e.preventDefault();
+    alert('Dropped!');
+  };
+  const handleDragOver = (e) => e.preventDefault();
+  return (
+    <div
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      style={{ width: 200, height: 100, border: '1px solid black' }}
+    >
+      Drag something here
+    </div>
+  );
+}
+
+Handles dragging and dropping elements.
+Summary Table of Event Examples
+Event Type	         React Prop Name	    Brief Description	    Example Code
+Click	             onClick	            Mouse click	            Button alert on click
+Input change	     onChange	            Input value change	    Updating text input
+Form submission      onSubmit	            Form submit      	    Alert on form submit
+Keyboard	         onKeyDown, onKeyUp	    Key press/release	    Log key pressed
+Mouse enter/leave	 onMouseEnter/Leave	    Mouse hover enter/leave	Change background on hover
+Focus and Blur	     onFocus, onBlur	    Element focus change	Placeholder change on input focus
+Clipboard	         onCopy, onPaste	    Clipboard copy/paste	Alert on copy
+Drag and Drop	     onDragStart, onDrop	Dragging functionality	Alert on drop
+
+React events are written in camelCase and take functions  
+directly in JSX. They receive a SyntheticEvent object with
+useful info about the event.

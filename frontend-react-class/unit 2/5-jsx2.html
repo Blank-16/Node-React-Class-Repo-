@@ -1,0 +1,121 @@
+JSX with Curly Braces
+Using Variables Inside JSX
+
+JSX allows you to insert JavaScript variables inside HTML using curly braces {}.
+function App() {
+  const name = "kuldeep kushwaha";
+  let x = 10;
+  let y = 20;
+  return (
+    <div>
+      <h1>JSX with Curly Braces</h1>
+      <h2>{name}</h2>
+      <h1>{x + y}</h1>
+    </div>
+  );
+}
+
+***********************************************************************
+Conditional Rendering in JSX
+
+You can also use conditions inside JSX using the ternary operator:
+function App() {
+  const name = "kuldeep kushwaha";
+
+  return (
+    <div>
+      
+      <h2>{name ? name : "User not Found"}</h2>
+      
+    </div>
+  );
+}
+
+
+******************************************************************
+Using Functions Inside JSX
+
+You can call functions directly within JSX:
+function App() {
+  function fruit() {
+    return "Apple";
+  }
+  return <h1>{fruit()}</h1>;
+}
+
+*******************************************************************
+Performing Operations in JSX
+
+You can write logic-based operations and call them inside your JSX:
+function App() {
+  function operation(a, b, op) {
+    if (op == "+") {
+      return a + b;
+    } else if (op == "-") {
+      return a - b;
+    } else {
+      return a * b;
+    }
+  }
+  return (
+    <div>
+<h1>{operation(20, 10, "-")}</h1>
+<h1>{operation(20, 10, "+")}</h1>
+<h1>{operation(20, 10, "")}</h1>
+    </div>
+  );
+}
+
+
+*******************************************************************
+Using Objects and Arrays with JSX
+
+Working with objects:
+function App() {
+  const userObj = {
+    name: "Kuldeep Kushwaha",
+    email: "kuldeep@test.com",
+    age: 29,
+  };
+
+  return (
+    <div>
+        <h1>{userObj.name}</h1>
+        <h1>{userObj.email}</h1>
+        <h1>{userObj.age}</h1>
+    </div>
+  );
+}
+
+*******************************************************************
+Working with arrays:
+
+function App() {
+  const userArray = ["sam", "peter", "bruce"];
+
+  return (
+    <div>
+<h1>{userArray[0]}</h1>
+    </div>
+  );
+}
+
+
+*************************************************************************88
+Using HTML Tag Attributes with JSX
+
+JSX also allows you to use dynamic values inside tag properties such as
+ value, id, or src.
+function App() {
+  const name = "peter";
+  let path =
+"https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2018/4/10/1/HBFB1406_180126_dog-on-rug_041.jpg.rend.hgtvcom.616.822.suffix/1523383802334.jpeg";
+
+  return (
+    <div>
+      <input type="text" value={name} id={name} />
+      <br />
+      <img src={path} alt="problem in loading" />
+    </div>
+  );
+}

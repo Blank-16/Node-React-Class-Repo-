@@ -1,0 +1,152 @@
+Built-in React Hooks: Examples and Explanations
+
+React offers numerous built-in hooks that let you add powerful
+features to your function components without writing classes.
+
+Here are the most common ones, with brief examples and explanations,
+
+moving from basic to slightly advanced usage.
+
+************************************************************************
+1. useState
+Purpose: Lets components hold and update local state.
+
+jsx
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0); // state variable and updater
+  return (
+    <>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Add</button>
+    </>
+  );
+}
+useState(0) creates a state variable count (initialized to 0) and
+ a function setCount to update it. Each call to setCount will rerender
+  the component.
+
+
+************************************************************************
+2. useEffect
+Purpose: Run side effects (fetching data, timers, manual DOM changes).
+Can run after every render, on first render, or when certain data changes.
+
+jsx
+import React, { useState, useEffect } from 'react';
+
+function Example() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    document.title = `You clicked ${count} times`;
+  }, [count]); // effect runs when 'count' changes
+
+  return (
+    <button onClick={() => setCount(count + 1)}>
+      You clicked {count} times
+    </button>
+  );
+}
+useEffect above updates the document title whenever count changes. 
+The second argument [count] is the dependency array.
+
+************************************************************************
+3. useContext
+Purpose: Access shared data from a React Context, avoiding 'prop drilling'.
+
+jsx
+import React, { useContext } from 'react';
+import ThemeContext from './ThemeContext';
+
+function Button() {
+  const theme = useContext(ThemeContext);
+  return <button style={{ background: theme.background }}>Click</button>;
+}
+useContext(ThemeContext) gives direct access to context data,
+ so any change to ThemeContext will rerender this component.
+
+************************************************************************
+
+4. useRef
+Purpose: Hold a mutable value that persists across renders but does
+not trigger rerenders. Often used for accessing DOM nodes directly.
+
+jsx
+import React, { useRef } from 'react';
+
+function FocusInput() {
+  const inputRef = useRef(null);
+
+  function focus() {
+    inputRef.current.focus();
+  }
+  return (
+    <>
+      <input ref={inputRef} />
+      <button onClick={focus}>Focus Input</button>
+    </>
+  );
+}
+inputRef stores a reference to the <input>, allowing you to call 
+.focus() on it directly.
+
+***********************************************************************
+5. useReducer
+Purpose: For complex state logic, similar to Redux-style reducers.
+
+jsx
+import React, { useReducer } from 'react';
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment': return { count: state.count + 1 };
+    case 'decrement': return { count: state.count - 1 };
+    default: throw new Error();
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
+  return (
+    <>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
+    </>
+  );
+}
+useReducer works well with logic that depends on previous state
+ or with multiple related state values.
+
+************************************************************************
+6. useMemo & useCallback (Performance)
+useMemo: Memoizes a value, recalculator only when dependencies change.
+
+useCallback: Memoizes a function, useful when passing callbacks 
+to deeply nested children or for optimization.
+
+jsx
+const expensiveValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+const memoizedCallback = useCallback(() => { doSomething(a, b); }, [a, b]);
+
+************************************************************************
+7. Other Hooks
+useLayoutEffect: Like useEffect, but fires synchronously after DOM updates.
+
+useImperativeHandle: Customize the instance value that is exposed
+when using ref with React.forwardRef.
+
+Review
+Use useState for component data
+
+Use useEffect for side effects
+
+Use useContext for global/shared state
+
+Use useRef for DOM refs or persistent/imperative values
+
+Use useReducer for advanced state logic
+
+Try these hooks in a small demo project or experiment—hands-on 
+practice is the best way to internalize their behavior.

@@ -1,0 +1,50 @@
+React useCallback Examples: Basic to Advanced
+The useCallback hook in React is used to memoize functions so they are only recreated when their dependencies change. This can optimize rendering, especially with components relying on function props.​
+
+Basic Example: Preventing Unnecessary Re-renders
+Let's say you have a parent component passing a function prop to a memoized child. If you don't use useCallback, the function gets recreated every render.
+
+jsx
+// Without useCallback
+const Button = React.memo(({ onClick, text }) => {
+  console.log(`${text} button rendered`);
+  return <button onClick={onClick}>{text}</button>;
+});
+
+function Parent() {
+  const [count, setCount] = React.useState(0);
+  const handleClick = () => setCount(count + 1); // New function every render
+  return <Button onClick={handleClick} text="Count" />;
+}
+With useCallback, the function is memoized and doesn't trigger the child to re-render unless its dependencies change.
+
+jsx
+// With useCallback
+const handleClick = useCallback(() => setCount(count + 1), [count]);
+Intermediate Example: Multiple States, Multiple Memoized Callbacks
+You can memoize several callbacks for multiple state variables:
+
+jsx
+const incCount = useCallback(() => setCount(count + 1), [count]);
+const decCount = useCallback(() => setCount(count - 1), [count]);
+const incNum = useCallback(() => setNum(num + 1), [num]);
+This pattern avoids re-creating functions for each counter unless the relevant state changes. Can you spot how the dependencies differ for each?​
+
+Advanced Example: Stable References for Event Unsubscriptions
+Suppose you want to add and remove event listeners effectively with stable handler references:
+
+jsx
+const handler = useCallback(() => { /* do something */ }, []);
+
+useEffect(() => {
+  element.addEventListener('resize', handler);
+  return () => element.removeEventListener('resize', handler);
+}, [element, handler]);
+Without useCallback, your handler function would be a new reference each time, making removal unreliable.​
+
+Summary: When to Use useCallback?
+Use it when passing callbacks to memoized children (e.g., React.memo)
+
+Use it for stable function references (e.g., event listeners, observers)
+
+Not needed for functions defined inside useEffect or plain event handlers where reference stability isn't crucial

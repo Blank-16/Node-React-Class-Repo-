@@ -1,0 +1,139 @@
+1. Header Component
+
+Header.module.css
+
+css
+.header {
+  background-color: #222;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+Header.jsx
+
+jsx
+import React from 'react';
+import styles from './Header.module.css';
+
+function Header() {
+  return <header className={styles.header}>My App Header</header>;
+}
+
+export default Header;
+
+2. Sidebar Component
+
+Sidebar.module.css
+
+css
+.sidebar {
+  width: 200px;
+  background: #f2f2f2;
+  padding: 15px;
+  height: 100vh;
+}
+
+Sidebar.jsx
+
+jsx
+import React from 'react';
+import styles from './Sidebar.module.css';
+
+function Sidebar() {
+  return (
+    <aside className={styles.sidebar}>
+      Sidebar Content
+    </aside>
+  );
+}
+
+export default Sidebar;
+
+3. Content Component
+
+Content.module.css
+
+css
+.content {
+  padding: 30px;
+  background: #fff;
+  font-size: 18px;
+}
+
+Content.jsx
+
+jsx
+import React from 'react';
+import styles from './Content.module.css';
+
+function Content() {
+  return (
+    <main className={styles.content}>
+      This is the main content area.
+    </main>
+  );
+}
+
+export default Content;
+
+4. Footer Component
+
+Footer.module.css
+
+css
+.footer {
+  background: #333;
+  color: #ccc;
+  text-align: center;
+  padding: 12px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+Footer.jsx
+
+jsx
+import React from 'react';
+import styles from './Footer.module.css';
+
+function Footer() {
+  return (
+    <footer className={styles.footer}>
+      &copy; 2025 My App. All rights reserved.
+    </footer>
+  );
+}
+
+export default Footer;
+
+Key Points
+
+    Each component and its CSS module should reside in the same folder 
+    for best organization.
+
+    Use the syntax import styles from './Component.module.css';
+     in the respective JSX file.
+
+    Reference classes in JSX as className={styles.className}—this 
+    applies styles only to that component and avoids CSS conflicts.
+
+
+import Header from './components/css/Header.jsx'
+import Sidebar from './components/css/Sidebar.jsx'
+import Footer from './components/css/Footer.jsx'    
+import Content from './components/css/Content.jsx'
+
+function App() {
+  return (
+    <div>
+      <Header></Header>
+      <Sidebar />
+      <Content />
+      <Footer></Footer>
+    </div>
+  )
+}
+
+export default App

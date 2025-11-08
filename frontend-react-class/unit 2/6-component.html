@@ -1,0 +1,118 @@
+What is a Component?
+
+In React, a component is a small, reusable part of the UI (User Interface).
+
+Think of a component as a building block of your app.
+
+
+Example:
+
+If your project is a car, its components would be:
+
+Tyres
+
+Engine
+
+Doors
+
+Gearbox
+
+
+Similarly, in a React project:
+
+The header, button, footer, or form field can be components.
+
+
+Nested Components
+
+A component can contain other smaller components inside it.
+
+For example: A Form component may include an Input component and a 
+Button component
+
+
+Role of Components in React
+
+    Every part of the UI in React is made using components.
+    Components can be reused throughout the app.
+    They make the code modular, readable, and easy to maintain.
+
+
+Rules for Writing Components
+
+    Always start component names with a Capital Letter.
+    Components must return a single parent tag.
+    Use <div>...</div> or <>...</> (React Fragment).
+
+
+You can use a component like an HTML tag:
+<Fruit />
+<Color></Color>
+
+
+How to Write Your First React Component
+
+In App.jsx:
+function App() {
+  return (
+    <div>
+      <h1>First Component</h1>
+    </div>
+  );
+}
+
+
+Add more components in the same file:
+function Fruit() {
+  return <h1>Apple</h1>;
+}
+
+function Color() {
+  return <h1>Red Color</h1>;
+}
+
+How to Use a Component
+function App() {
+  return (
+    <div>
+      <h1>First Component</h1>
+      <Fruit />        {/* Self-closing tag */}
+      <Color></Color>  {/* Normal tag */}
+    </div>
+  );
+}
+
+
+Note
+
+    A React component must return a single tag.
+
+    You cannot return two or more HTML elements side by side
+    without wrapping them.
+
+
+return (
+  <div>
+    <h1>Title</h1>
+    <p>Description</p>
+  </div>
+);
+
+
+Component vs Normal Function
+
+    Normal Function
+    Can start with lowercase
+    Executes JavaScript logic
+    Called like myFunction()
+    Any data type
+
+
+React Component
+
+    Must start with a Capital Letter
+    Returns JSX (UI)
+    Used like <MyComponent />
+    Returns JSX (HTML-like)
+
+   Ab- 5,10,11,23,24,26,30,32,34,38,40,43,46,49,54,57,61,65,66

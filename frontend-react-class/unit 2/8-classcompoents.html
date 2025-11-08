@@ -1,0 +1,211 @@
+
+************************************************************************
+Example 1: Basic React Class Component
+
+jsx
+import React from "react";
+
+class Welcome extends React.Component {
+  render() {
+    return <h1>Hello, Welcome to React Class Components!</h1>;
+  }
+}
+
+export default Welcome;
+
+This basic example defines a Welcome class component that uses the
+render() method to return simple JSX output. 
+
+Every class component must extend React.
+
+Component and must include a render() function to produce content.
+
+​*******************************************************************************
+Example 2: Class Component with State
+
+jsx
+import React from "react";
+
+class FavoriteColor extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { favoriteColor: "red" };
+  }
+
+  
+  render() {
+    return <h2>My favorite color is {this.state.favoriteColor}</h2>;
+  }
+}
+
+export default FavoriteColor;
+
+Here, the state property holds dynamic data that can change
+during a component’s lifecycle. It is initialized inside the constructor.
+
+​**************************************************************************
+Example 3: Updating State Using componentDidMount()
+
+jsx
+import React from "react";
+
+class ColorChanger extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { color: "blue" };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ color: "green" });
+    }, 2000);
+  }
+
+  render() {
+    return <h3>The color changed to {this.state.color}</h3>;
+  }
+}
+
+export default ColorChanger;
+
+This demonstrates how to use lifecycle methods such 
+as componentDidMount() to update the component’s state after rendering.
+
+​****************************************************************************
+Example 4: Handling Arrays in Class Components
+
+jsx
+import React, { Component } from "react";
+
+class FruitsList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fruits: ["Apple", "Banana", "Orange", "Grapes"],
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Fruit List</h2>
+        <ul>
+          {this.state.fruits.map((fruit, index) => (
+            <li key={index}>{fruit}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
+
+export default FruitsList;
+
+Here, .map() is used to iterate through an array stored
+ in the state and render each element dynamically.
+
+​*************************************************************************
+Example 5: Using Arrays of Objects
+
+jsx
+import React, { Component } from "react";
+
+class EmployeeList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      employees: [
+        { id: 1, name: "Amit", role: "Developer" },
+        { id: 2, name: "Sita", role: "Designer" },
+        { id: 3, name: "Ravi", role: "Manager" },
+      ],
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Employee Directory</h2>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.employees.map((emp) => (
+              <tr key={emp.id}>
+                <td>{emp.id}</td>
+                <td>{emp.name}</td>
+                <td>{emp.role}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+}
+
+export default EmployeeList;
+
+This renders an array of objects into a structured table,
+ showing how to handle object data types in state effectively.
+
+​*********************************************************************
+Example 6: Nested Arrays and Objects
+
+jsx
+import React, { Component } from "react";
+
+class Courses extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      categories: [
+        {
+          id: 1,
+          name: "Development",
+          items: ["React", "Node", "Angular"],
+        },
+        {
+          id: 2,
+          name: "Design",
+          items: ["Figma", "Sketch", "Photoshop"],
+        },
+      ],
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Available Categories</h2>
+        {this.state.categories.map((cat) => (
+          <div key={cat.id}>
+            <h3>{cat.name}</h3>
+            <ul>
+              {cat.items.map((tool, index) => (
+                <li key={index}>{tool}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    );
+  }
+}
+
+export default Courses;
+
+This example demonstrates how nested arrays and objects 
+can be structured and rendered dynamically using multiple map() calls.
+
+​
+
+These examples form a complete progression from basic 
+React class components to more advanced examples managing 
+arrays, objects, and nested data, reflecting modern React
+development patterns.

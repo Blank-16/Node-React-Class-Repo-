@@ -1,0 +1,112 @@
+package.json
+
+
+Most important file in a React project
+
+It contains:
+
+    Project name, version, and metadata
+    Build commands and scripts
+    Dependencies and devDependencies
+
+#########################################################################
+Difference Between Dependencies and DevDependencies
+
+
+Dependencies
+
+Required for running the project (e.g., React, ReactDOM)
+
+
+DevDependencies
+
+Required only during development (e.g., ESLint, Vite, Babel)
+
+
+    These packages are downloaded and stored inside the node_modules folder.
+
+##########################################################################
+package-lock.json
+
+
+    It stores the exact version of each installed dependency.
+    Contains a nested structure of dependencies.
+    Helps ensure consistent installs across different machines.
+
+
+README.md
+
+
+    A documentation file about your project.
+    Commonly includes:
+    Project purpose
+    How to install and run
+    Author info, etc.
+
+
+vite.config.js
+
+
+    Contains configuration settings for Vite (the build tool).
+    Used to set aliases, plugins, ports, etc.
+
+
+eslint.config.js
+
+    Contains ESLint rules (JavaScript code standards)
+    Helps with code quality and linting
+
+
+.gitignore
+
+    Lists files and folders that should not be pushed to Git
+     (e.g., node_modules, .env, dist, etc.)
+
+
+
+Project Files Overview
+
+
+index.html
+
+Browser's entry point (root <div> is here)
+
+
+main.jsx	
+
+React/JS entry point; renders the <App /> component
+
+
+App.jsx
+
+Main React component
+
+
+App.css, index.css
+
+Styling files for components and global styles
+
+
+Best Practices
+
+    Create React components inside the src/components folder
+    
+    If something is meant for public access (like images, favicon, etc.), 
+    use the public folder.
+    
+    For assets used internally (like logos, icons, CSS files), 
+    use an assets folder inside src.
+
+
+node_modules
+
+    Contains all installed libraries and packages
+
+    Automatically created when you run npm install or yarn install
+
+
+Why Should You Not Push node_modules to Git?
+
+    It is very large in size
+    Other developers can simply run npm install to recreate it 
+    from package.json

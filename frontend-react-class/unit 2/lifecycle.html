@@ -1,0 +1,139 @@
+<!--
+ReactJS Lifecycle
+
+Every React Component has a lifecycle of its own, the lifecycle of a component can be defined
+as the series of methods that are invoked in different stages of the component’s existence.
+
+React automatically calls these methods at different points in a component’s life cycle.
+
+Understanding these phases helps manage the state, perform side effects, and optimize 
+components effectively.
+
+
+1. Initialization
+
+This is the stage where the component is constructed with the given Props and default state.
+
+This is done in the constructor of a Component Class.
+
+
+2. Mounting Phase
+
+1)Constructor: The constructor method initializes the component. It’s where you set up the initial
+state and bind event handlers.
+
+2)render(): This method returns the JSX representation of the component. It’s called during initial
+rendering and subsequent updates.
+
+3)componentDidMount(): After the component is inserted into the DOM, this method is invoked.
+Use it for side effects like data fetching or setting timers.
+
+3. Updating Phase
+
+4)componentDidUpdate(prevProps, prevState): Called after the component updates due to new props or 
+state changes. Handle side effects here.
+
+5)shouldComponentUpdate(nextProps, nextState): Determines if the component should re-render. 
+Optimize performance by customizing this method.
+
+render(): Again, the render() method reflects changes in state or props during updates.
+
+4. Unmounting Phase
+
+6)componentWillUnmount(): Invoked just before the component is removed from the DOM.
+ 
+Clean up resources (e.g., event listeners, timers). -->
+
+
+
+
+Full Example: React Lifecycle (Class Component)
+
+js
+import React from "react";
+
+class LifecycleDemo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+    console.log("Constructor: Component is initializing.");
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log("getDerivedStateFromProps: Sync state with props if needed.");
+    // No change to state in this case
+    return null;
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount: Component mounted.");
+    // Simulate data fetch
+    this.intervalId = setInterval(() => {
+      this.setState((prevState) => ({ count: prevState.count + 1 }));
+    }, 1000);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("shouldComponentUpdate: Should component re-render?");
+    // Prevent rendering if count exceeds 5
+    return nextState.count <= 5;
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log("getSnapshotBeforeUpdate: Just before DOM updates.");
+    // Return null if no snapshot is needed
+    return null;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("componentDidUpdate: Component updated.");
+  }
+
+  componentWillUnmount() {
+    console.log("componentWillUnmount: Cleaning up...");
+    clearInterval(this.intervalId);
+  }
+
+  render() {
+    console.log("Render: Rendering UI.");
+    return (
+      <div className="p-4 border rounded shadow bg-gray-50 max-w-sm mx-auto mt-8">
+        <h2 className="text-xl font-semibold mb-2">React Lifecycle Demo</h2>
+        <p className="mb-2">Count: {this.state.count}</p>
+        <button
+          className="px-4 py-2 bg-blue-600 text-white rounded"
+          onClick={() => this.setState({ count: 0 })}
+        >
+          Reset Count
+        </button>
+      </div>
+    );
+  }
+}
+
+export default LifecycleDemo;
+
+    This component automatically increments count every second until it reaches 5; further increments
+     are blocked by shouldComponentUpdate.
+
+    All lifecycle methods print messages so you can track their invocation in the browser console.
+
+    Tailwind classes are used for styling.
+
+Usage
+
+js
+import React from "react";
+import LifecycleDemo from "./LifecycleDemo";
+
+function App() {
+  return (
+    <div>
+      <LifecycleDemo />
+    </div>
+  );
+}
+
+export default App;
+
+    Import and use the lifecycle demo in the root App component.

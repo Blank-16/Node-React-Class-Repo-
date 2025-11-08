@@ -1,0 +1,102 @@
+
+Click Event and Function call
+
+----------------------------------------------------------------
+Difference Between JavaScript and React Function Calls
+
+HTML Example:
+<h1>kuldeep  Todos</h1>
+    <img
+      src="https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2018/4/10/1/HBFB1406_180126_dog-on-rug_041.jpg.rend.hgtvcom.616.822.suffix/1523383802334.jpeg"
+      alt="Anil Sood"
+      class="photo"
+    />
+
+    <ul>
+      <li>Invent the traffic light</li>
+      <li>Rehearse a movie scene</li>
+      <li>Improve the spectrum technology</li>
+    </ul>
+
+    <button onclick="callFun()">Click Me</button>
+
+    <script>
+      function callFun() {
+        alert("function called");
+      }
+    </script>
+
+--------------------------------------------------------------------------
+The Same Code Won’t Work in React JSX
+function App() {
+  function callFun() {
+    alert("Function called");
+  }
+
+  return (
+    <div>
+      <button onclick="callFun()">Click Me</button> {/* ❌ Wrong */}
+    </div>
+  );
+}
+
+
+Correct Way to Use onClick in React JSX
+function App() {
+  function callFun() {
+    alert("Function called");
+  }
+
+  return (
+    <div>
+      <button onClick={callFun}>Click Me</button>
+    </div>
+  );
+}
+
+--------------------------------------------------------------------------------
+Important JSX Rules:
+
+    Use camelCase: onClick instead of onclick.
+    Don’t use quotes "": JSX treats quoted functions as strings.
+    Do not call the function immediately using (). Just pass the reference 
+    like onClick={callFun}.
+
+
+Using Arrow Functions in JSX
+
+You can also use arrow functions instead of normal functions:
+function App() {
+  const fruits = () => {
+    alert("Apple");
+  };
+
+  return (
+    <div>
+      <button onClick={fruits}>Click Me</button>
+    </div>
+  );
+}
+
+
+Passing Parameters to Functions in JSX
+
+If you want to pass parameters, you must use an inline arrow function:
+function App() {
+  const fruits = (name) => {
+    alert(name);
+  };
+
+  return (
+    <div>
+      <button onClick={() => fruits("Apple")}>Apple</button>
+      <button onClick={() => fruits("Banana")}>Banana</button>
+    </div>
+  );
+}
+
+Use Arrow Functions
+
+Because onClick={fruits("Apple")} will call the function immediately, 
+not on click. Using onClick={() => fruits("Apple")} ensures the function
+runs only when the button is clicked.

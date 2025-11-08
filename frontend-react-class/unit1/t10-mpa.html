@@ -1,0 +1,92 @@
+1. MPA – Multi-Page Application
+Definition
+
+    A Multi-Page Application is a traditional web app structure where each 
+    page is loaded separately from the server.
+
+    Every time the user navigates, the browser sends a request to the server,
+     and the server returns a new HTML page.
+
+How it works
+
+    User clicks a link.
+
+    Browser sends HTTP request to server.
+
+    Server sends a full HTML document back.
+
+    Page reloads completely.
+
+Example (Simple MPA flow)
+
+index.html → about.html → contact.html
+
+Each page is separate and has its own HTML file.
+
+Advantages
+
+    SEO-friendly by default (each page has its own HTML).
+
+    Simpler for small, content-heavy websites.
+
+    Easy to implement with plain HTML, CSS, JS, or server-side frameworks like
+    PHP, Django, Laravel.
+
+Disadvantages
+
+    Full page reloads = slower navigation.
+
+    More repeated code between pages.
+
+    Harder to create dynamic, app-like experiences.
+
+2. React Framework (SPA by nature)
+Definition
+
+    React is a JavaScript library (not a full framework) for building Single-Page
+    Applications (SPAs).
+
+    Instead of loading full pages from the server, React renders content 
+    dynamically in the browser.
+
+    Uses JavaScript + Virtual DOM to update only the parts of the page that
+    change.
+
+How it works
+
+    Browser loads one main HTML file (index.html).
+
+    React takes over and dynamically renders components inside it.
+
+    Navigation changes the URL but does not reload the entire page — only
+    updates what’s needed.
+
+Example (Simple React SPA flow)
+
+index.html → React Router changes view to "About" → No full reload
+
+Advantages
+
+    Faster navigation (no full reloads).
+
+    App-like user experience.
+
+    Modular, reusable UI components.
+
+    Easy to manage dynamic data.
+
+Disadvantages
+
+    SEO requires extra setup (e.g., SSR with Next.js).
+
+    Larger initial load time (JavaScript bundle).
+
+    Needs a build process (Webpack, Vite, etc.).
+
+3. Key Difference Table
+Feature      	MPA	                              React (SPA)
+Navigation	    Full page reloads	               No full reload (client-side)
+SEO	            Great by default	               Needs SSR or prerendering
+Speed	        Slower between pages	           Faster, smooth transitions
+Complexity	    Simple setup	                   Needs JS build tools
+Best for	    Blogs, news sites, simple sites	   Web apps, dashboards, interactive UIs
