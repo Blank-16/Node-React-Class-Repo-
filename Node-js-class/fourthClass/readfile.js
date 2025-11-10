@@ -1,7 +1,7 @@
 
 const fs = require('fs')
 
-fs.readFile('/Node-js-class/fourthClass/data.json', 'utf-8', (err, data) => {
+fs.readFile('./Node-js-class/fourthClass/data.json', 'utf-8', (err, data) => {
     if (err) {
         console.log(`Error loading File: ${err}`)
         return;

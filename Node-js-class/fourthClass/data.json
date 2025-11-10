@@ -1,8 +1,8 @@
-
 {
-    "name" : "Blank",
-    "age" : 21,
-    "city" : "Asansol",
-    "contact" : 1234,
-    "address" : "WB"
+  "name": "Blank",
+  "age": 21,
+  "city": "Barracks",
+  "contact": 1234,
+  "address": "WB",
+  "prof": "Dok-ja"
 }
