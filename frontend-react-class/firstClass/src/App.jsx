@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import Dominoz from "./pages/Dominoz"
 
 function ClipboardExample() {
@@ -23,5 +24,51 @@ function App() {
   )
 }
 
+function UseEffectPrac() {
+  const [users, setUsers] = useState([])
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(res => res.json())
+      .then(json => setUsers(json))
+  }, [])
+
+  return (
+    <div className="">
+      <h2>
+        User List
+      </h2>
+      <h6>{console.log(users)}</h6>
+      {users.map((u) => (
+        <li key={u.id}>{u.id} - {u.name}</li>
+      ))}
+    </div>
+  )
+}
+
+function Refprac1() {
+  const countRef = useRef(0)
+
+  function handleClick() {
+    countRef.current += 1;
+    alert(`You clicked ${countRef.current} times!`)
+  }
+  return <button onClick={handleClick}>Click me!</button>
+}
+
+function Refprac2() {
+  const [inputValue, setInputValue] = useState('')
+  const previousValue = useRef('')
+
+  useEffect(() => {
+    previousValue.current = inputValue
+  }, [inputValue])
+
+  return (
+    <>
+      <input type="text" value={inputValue}
+        onChange={e => setInputValue(e.target.value)} />
+    </>
+  )
+}
 
 export default App
