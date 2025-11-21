@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext, createContext } from "react";
 import Dominoz from "./pages/Dominoz"
 
 function ClipboardExample() {
@@ -6,8 +6,12 @@ function ClipboardExample() {
   return <input onCopy={handleCopy} placeholder="Try copying this text" />;
 }
 
-
+const UserContext = createContext()
 function App() {
+
+  const [user] = useState('Blank')
+
+
   return (
     <div>
       <hr />
@@ -20,7 +24,15 @@ function App() {
       <ClipboardExample />
       <hr />
       <textarea name="" onSelect={(e) => console.log(e.target.value.substring(e.target.selectionStart, e.target.selectionEnd))} id=""></textarea>
+
+
+      <UserContext.Provider value={user}>
+        <Intermediate />
+      </UserContext.Provider>
+
     </div>
+
+
   )
 }
 
@@ -69,6 +81,15 @@ function Refprac2() {
         onChange={e => setInputValue(e.target.value)} />
     </>
   )
+}
+
+
+function Intermediate() {
+  return <DeepChild />
+}
+function DeepChild() {
+  const user = useContext(UserContext)
+  return <div>Deep Child User: {user}</div>
 }
 
 export default App
