@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input type="text" id="username" placeholder="Enter your name">
+    <button onclick="setUser()">Save Name</button>
+
+    <br><br>
+
+    <input type="text" id="msg" placeholder="Type a message...">
+    <button onclick="sendMessage()">Send</button>
+
+    <ul id="messages"></ul>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        let user = "";
+
+        function setUser() {
+            user = document.getElementById("username").value;
+        }
+
+        function sendMessage() {
+            const msg = document.getElementById("msg").value;
+
+            if (!user) {
+                alert("Please enter your userName first!")
+                return
+            }
+
+            socket.emit("chatMessage", {
+                user: user,
+                message: msg
+            })
+
+            document.getElementById("msg").value = ""
+        }
+
+        socket.on("chatMessage", (data) => {
+            const messages = document.getElementById("messages")
+            const li = document.createElement("li")
+            li.appendChild(document.createTextNode(`${data.user} : ${data.message}`))
+            messages.appendChild(li)
+        })
+    </script>
+
+</body>
+
+</html>
