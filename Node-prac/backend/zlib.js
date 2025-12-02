@@ -18,6 +18,9 @@ const compression = () => {
         .pipe(writeStream)
         .on('finish', () => {
             console.log('Compression finished. File saved as Zlib.md.gz')
+
+            // race condition issue will occur if trying to call decompression() at the end with compression() as node js is asynchronus....
+
             decompression()
         })
 }
