@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useContext, createContext } from "react";
+import { Router, Routes, Route } from 'react-router-dom'
 import Dominoz from "./pages/Dominoz"
 
 function ClipboardExample() {
@@ -93,3 +94,17 @@ function DeepChild() {
 }
 
 export default App
+
+
+function PageRender() {
+
+  return (
+    <Router>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/about:users" element={<ProfilePage />} />
+      </Routes>
+    </Router>
+  )
+}
